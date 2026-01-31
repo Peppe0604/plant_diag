@@ -4,14 +4,17 @@
 #include "expert_system.h"
 #include "bayes_network.h"
 
+#define TRAIN_PATH "doc/train.csv"
+#define TEST_PATH "doc/test.csv"
+
 int main() {
     printf("==========================================\n");
     printf("       SISTEMA DIAGNOSTICO PIANTE         \n");
     printf("==========================================\n");
 
     printf("Caricamento dataset di training...\n");
-    if (!train_model("doc/train.csv")) {
-        printf("AVVISO: File 'doc/train.csv' non trovato. La rete Bayesiana non funzionera'.\n");
+    if (!train_model(TRAIN_PATH)) {
+        printf("AVVISO: File '%s' non trovato. La rete Bayesiana non funzionera'.\n", TRAIN_PATH);
     }
 
     const char *options[] = {
@@ -35,7 +38,7 @@ int main() {
                 wait_user();
                 break;
             case 3:
-                test_model_accuracy("doc/test.csv");
+                test_model_accuracy(TEST_PATH);
                 wait_user();
                 break;
             case 4:
@@ -46,3 +49,4 @@ int main() {
 
     return 0;
 }
+
